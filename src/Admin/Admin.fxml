@@ -1,14 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Admin.AdminController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Admin.AdminController">
+   <children>
+      <TabPane layoutX="6.0" layoutY="6.0" prefHeight="693.0" prefWidth="1193.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Students">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1200.0">
+                     <children>
+                        <TableView layoutX="329.0" prefHeight="668.0" prefWidth="864.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="ID" />
+                            <TableColumn prefWidth="213.0" text="Fist Name" />
+                              <TableColumn minWidth="0.0" prefWidth="200.0" text="Last Name" />
+                              <TableColumn prefWidth="255.0" text="E-mail" />
+                              <TableColumn prefWidth="120.0" text="Date of Birth" />
+                          </columns>
+                        </TableView>
+                        <VBox layoutY="1.0" prefHeight="666.0" prefWidth="329.0" style="-fx-background-color: #a0bbe5;">
+                           <children>
+                              <Label prefHeight="32.0" prefWidth="329.0" text="Add Student">
+                                 <padding>
+                                    <Insets left="50.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField />
+                              <JFXTextField layoutX="10.0" layoutY="42.0" promptText="ID">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                 </VBox.margin>
+                              </JFXTextField>
+                              <JFXTextField layoutX="10.0" layoutY="67.0" promptText="First Name">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                 </VBox.margin>
+                              </JFXTextField>
+                              <JFXTextField layoutX="10.0" layoutY="92.0" promptText="Last Name">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                 </VBox.margin>
+                              </JFXTextField>
+                              <JFXTextField layoutX="10.0" layoutY="117.0" promptText="Email">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                 </VBox.margin>
+                              </JFXTextField>
+                              <JFXDatePicker prefHeight="25.0" prefWidth="300.0">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                                 </VBox.margin>
+                              </JFXDatePicker>
+                              <JFXButton prefHeight="25.0" prefWidth="325.0" ripplerFill="BLACK" style="-fx-background-color: e1e6ef;" text="Add Enty">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <effect>
+                                    <Bloom />
+                                 </effect>
+                                 <padding>
+                                    <Insets left="15.0" right="15.0" />
+                                 </padding>
+                              </JFXButton>
+                              <JFXButton layoutX="25.0" layoutY="242.0" prefHeight="25.0" prefWidth="279.0" text="Clear Form" />
+                              <JFXButton layoutX="25.0" layoutY="267.0" prefHeight="25.0" prefWidth="279.0" text="Load Data" />
+                           </children>
+                           <padding>
+                              <Insets left="15.0" right="15.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
 </AnchorPane>
