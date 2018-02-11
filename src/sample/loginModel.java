@@ -29,21 +29,23 @@ public class loginModel {
         PreparedStatement pr = null;
         ResultSet rs = null;
 
-        String sql = "select * form login where username = ? and password = ? and division = ?";
+        String sql = "SELECT * FROM login where username = ? and password = ? and division = ?";
         try {
             pr = this.connection.prepareStatement(sql);
             pr.setString(1,user);
-            pr.setString(2, pass);
-            pr.setString(3, opt);
+            pr.setString(2,pass);
+            pr.setString(3,opt);
 
             rs = pr.executeQuery();
-            boolean bolll;
+            boolean boll1;
             if (rs.next()){
                 return  true;
             }
             return false;
         }catch (SQLException ex){
+            ex.printStackTrace();
             return false;
+
         }
         finally {
             pr.close();

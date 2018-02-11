@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class dbConnection {
 //    private static final String USERNAME = "";
 //    private static final String PASSWORD = "";
-    private static final String SQCONN = "jdbc:sqlite:thesis.sqlite";
+    private static final String SQCONN = "jdbc:sqlite:src\\thesis.sqlite";
 
 
     public static Connection getConnection() throws SQLException {

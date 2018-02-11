@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.layout.Pane;
-import Admin.AdminContoller;
+import Admin.AdminController;
 import Students.StudentsController;
 
 
@@ -32,7 +32,11 @@ public class Controller implements Initializable {
     @FXML
     private ComboBox combobox;
     @FXML
-    private Button btnlogin;
+    private Button btnLogin;
+    @FXML
+    private  Label loginStatus;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (this.loginModel.isDatabaseConnection()){
@@ -46,25 +50,30 @@ public class Controller implements Initializable {
 
     @FXML
     public void Login(ActionEvent event){
+//        System.out.println(this.username.getText());
+//        System.out.println(this.password.getText());
+//        System.out.println(this.combobox.getValue().toString());
+
+
         try {
-            if (this.loginModel.isLogin(this.username.getText(),this.password.getText(),((option)this.combobox.getValue()).toString()){
-                Stage stage = (Stage) this.btnlogin.getScene().getWindow();
+            if (this.loginModel.isLogin(this.username.getText(),this.password.getText(), this.combobox.getValue().toString())){
+                Stage stage = (Stage) this.btnLogin.getScene().getWindow();
                 stage.close();
-                switch (((option)this.combobox.getValue()).toString()){
+                switch (this.combobox.getValue().toString()){
                     case "Admin": adminLogin(); break;
                     case "Student": studentLogin(); break;
-
-
                 }
+            }else{
+                this.loginStatus.setText("Wrong Credential");
             }
 
-
         } catch (Exception localException) {
-
+            localException.printStackTrace();
         }
 
     }
     public void studentLogin(){
+
         try {
             Stage userStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
@@ -82,17 +91,23 @@ public class Controller implements Initializable {
         }
     }
     public void adminLogin(){
+
         try {
             Stage adminStage = new Stage();
             FXMLLoader adminLoader = new FXMLLoader();
+
             Pane adminroot = (Pane) adminLoader.load(getClass().getResource("/Admin/Admin.fxml").openStream());
-            AdminContoller adminContoller = (AdminContoller) adminLoader.getController();
+
+
+            AdminController adminController = (AdminController) adminLoader.getController();
             Scene scene = new Scene(adminroot);
             adminStage.setScene(scene);
             adminStage.setTitle("Admin Dashboard");
             adminStage.setResizable(false);
             adminStage.show();
+
         } catch (IOException ex) {
+
             ex.printStackTrace();
         }
 
