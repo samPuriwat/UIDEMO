@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -76,6 +77,7 @@ public class Controller implements Initializable {
     public void studentLogin(){
 
         try {
+
             Stage userStage = new Stage();
             FXMLLoader loader = new FXMLLoader();
             Pane root = (Pane) loader.load(getClass().getResource("/Students/StudentFXML.fxml").openStream());
@@ -91,10 +93,11 @@ public class Controller implements Initializable {
             ex.printStackTrace();
         }
     }
+    public  Stage adminStage = new Stage();
     public void adminLogin(){
 
         try {
-            Stage adminStage = new Stage();
+            //Stage adminStage = new Stage();
             FXMLLoader adminLoader = new FXMLLoader();
 
             Pane adminroot = (Pane) adminLoader.load(getClass().getResource("/Admin/Admin.fxml").openStream());

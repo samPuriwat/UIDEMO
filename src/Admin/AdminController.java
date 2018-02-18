@@ -1,24 +1,29 @@
 package Admin;
 
+import javafx.scene.Node;
+import sample.Main;
 import dbUtil.dbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 
 public class AdminController  implements Initializable{
     @FXML
@@ -44,6 +49,8 @@ public class AdminController  implements Initializable{
     private TableColumn<StudentData, String> emailcolum;
     @FXML
     private TableColumn<StudentData, String> dobcolum;
+    @FXML
+    private Button btnLogout;
 
     private dbConnection db;
     private ObservableList<StudentData> data;
@@ -111,5 +118,13 @@ public class AdminController  implements Initializable{
         this.lname.setText("");
         this.emails.setText("");
         this.dobs.setValue(null);
+    }
+    @FXML
+    private void logOut(ActionEvent event) throws Exception {
+        ((Node)event.getSource()).getScene().getWindow().hide();
+        Stage primaryStage = new Stage();
+        Main m = new Main();
+        m.start(primaryStage);
+
     }
 }//class
