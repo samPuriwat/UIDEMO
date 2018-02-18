@@ -37,6 +37,7 @@ public class Controller implements Initializable {
     private  Label loginStatus;
 
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (this.loginModel.isDatabaseConnection()){
