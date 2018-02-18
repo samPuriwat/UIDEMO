@@ -1,5 +1,7 @@
 package Admin;
 
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.scene.Node;
 import sample.Main;
 import dbUtil.dbConnection;
@@ -13,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
+import javax.sql.rowset.Predicate;
 import javax.swing.*;
 import java.net.URL;
 import java.sql.Connection;
@@ -48,6 +51,8 @@ public class AdminController  implements Initializable{
     private TableColumn<StudentData, String> dobcolum;
     @FXML
     private Button btnLogout;
+    @FXML
+    private TextField search;
 
     private dbConnection db;
     private ObservableList<StudentData> data;
@@ -83,6 +88,32 @@ public class AdminController  implements Initializable{
 
         this.studenttable.setItems(null);
         this.studenttable.setItems(this.data);
+
+        //Filter TableView
+        FilteredList<StudentData> filteredData = new FilteredList<>(data, e -> true);
+        search.setOnKeyReleased(e ->{
+            search.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredData.setPredicate(StudentData->{
+                    if (newValue == null || newValue.isEmpty()) {
+                        return  true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (StudentData.getID().contains(newValue)) {
+                        return true;
+                    } else if (StudentData.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (StudentData.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }
+                    return false;
+                }) ;
+            });
+
+            SortedList<StudentData> sortedData = new SortedList<>(filteredData);
+            sortedData.comparatorProperty().bind(studenttable.comparatorProperty());
+            studenttable.setItems(sortedData);
+                }
+        );
 
     }
 
