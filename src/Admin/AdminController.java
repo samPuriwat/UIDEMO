@@ -7,17 +7,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
 import javax.swing.*;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -121,6 +117,8 @@ public class AdminController  implements Initializable{
         this.emails.setText("");
         this.dobs.setValue(null);
     }
+
+    //switch scene to login.fxml
     @FXML
     private void logOut(ActionEvent event) throws Exception {
         ((Node)event.getSource()).getScene().getWindow().hide();
@@ -150,9 +148,48 @@ public class AdminController  implements Initializable{
             System.exit(1);
         }
         loadStudentData(new ActionEvent());
+    }
+    @FXML
+    private void editStudent(ActionEvent event){
+        StudentData std = studenttable.getSelectionModel().getSelectedItem();
+        if (std != null) {
+            ids.setText(std.getID());
+            //set textfiled to read only
+            ids.setDisable(true);
+            fname.setText(std.getFirstName());
+            lname.setText(std.getLastName());
+            emails.setText(std.getEmail());
+            dobs.getEditor().setText(std.getDOB());
+        } else {
+            System.exit(1);
+        }
 
 
+        }
+    @FXML
+    private void saveStudent(ActionEvent event){
+        StudentData std = studenttable.getSelectionModel().getSelectedItem();
+        JOptionPane.showConfirmDialog(null, "Do you want to update student ID: " + std.getID() + "");
+        String sqlEdit = "update user set  firstName =?, lastName =?, email =?, DOB =? where id = ?";
+        try {
+            Connection conn = dbConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sqlEdit);
 
+            stmt.setString(1, this.fname.getText());
+            stmt.setString(2, this.lname.getText());
+            stmt.setString(3, this.emails.getText());
+            stmt.setString(4, this.dobs.getEditor().getText());
+            stmt.setString(5, std.getID());
+
+
+            stmt.executeUpdate();
+            stmt.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        loadStudentData(new ActionEvent());
 
     }
+
 }//class

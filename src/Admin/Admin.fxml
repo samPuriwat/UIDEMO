@@ -107,6 +107,16 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
+                        <Button fx:id="btnEdit" layoutX="868.0" layoutY="8.0" mnemonicParsing="false" onAction="#editStudent" prefHeight="25.0" prefWidth="141.0" text="Edit User">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnSave" layoutX="729.0" layoutY="8.0" mnemonicParsing="false" onAction="#saveStudent" prefHeight="25.0" prefWidth="130.0" text="Save">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
             </content>
