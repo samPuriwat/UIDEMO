@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -109,6 +110,7 @@ public class AdminController  implements Initializable{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        loadStudentData(new ActionEvent());
     }
 
     @FXML
@@ -125,6 +127,32 @@ public class AdminController  implements Initializable{
         Stage primaryStage = new Stage();
         Main m = new Main();
         m.start(primaryStage);
+
+    }
+    @FXML
+    private void deleteRowFromTable(ActionEvent event)  {
+       // studenttable.getItems().removeAll(studenttable.getSelectionModel().getSelectedItem());
+        StudentData std = studenttable.getSelectionModel().getSelectedItem();
+        JOptionPane.showConfirmDialog(null, "Do you want to delete student ID: " + std.getID() + "");
+        if (std != null) {
+            String sql = "delete from user where id = ?";
+            try {
+                Connection conn = dbConnection.getConnection();
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setString(1, std.getID());
+                statement.executeUpdate();
+                statement.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            System.exit(1);
+        }
+        loadStudentData(new ActionEvent());
+
+
+
 
     }
 }//class
